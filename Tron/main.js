@@ -8,10 +8,12 @@ var yPos2 = 300;
 
 var bLoss, rLoss;
 
-var x = 1;
+var bScore = 0, rScore = 0;
 
 function setup() {
-    createCanvas(600,600);
+    var canvas = createCanvas(600,600);
+    canvas.parent("canvas");
+    document.getElementById("retry").style.visibility = "hidden";
     background(0);
     
     frameRate(15);
@@ -70,11 +72,16 @@ function draw() {
     if(rLoss == 1 && bLoss == 1) {
         status.innerHTML = "It's A Tie!";
         noLoop();
+        document.getElementById("retry").style.visibility = "visible";
     } else if(rLoss == 1) {
+        bScore++;
         status.innerHTML = "Blue Wins!";
         noLoop();
+        document.getElementById("retry").style.visibility = "visible";
     } else if(bLoss == 1) {
+        rScore++;
         status.innerHTML = "Red Wins!";
         noLoop();
+        document.getElementById("retry").style.visibility = "visible";
     }
 }

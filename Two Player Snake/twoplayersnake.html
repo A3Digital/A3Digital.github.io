@@ -5,6 +5,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.12/p5.js"></script>
         <script src="main.js"></script>
         <script src="movement.js"></script>
+        <script src="retry.js"></script>
         <meta name = "viewport" content = "width = device-width, intial-scale = 1.0">
         <link rel="stylesheet" href="../styles.css"/>
     </head>
@@ -25,6 +26,11 @@
                 </div>
             </div>
         </header>
-        <p id="status">|</p>
+        <p id = "status">Blue: 0 | Red: 0</p>
+        <div id = "canvas"></div>
+        <div id = "retry">
+            <p>Click if you want to play again!</p>
+            <button onclick = "retry()"></button>
+        </div>
     </body>
 </html>

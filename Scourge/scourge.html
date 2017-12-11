@@ -6,6 +6,7 @@
         <script src="https://cdn.rawgit.com/molleindustria/p5.play/1bf3c72fe6b647617373b9b3ea3e419baaef8cfd/lib/p5.play.js"></script>
         <script src="main.js"></script>
         <script src="movement.js"></script>
+        <script src="retry.js"></script>
         <meta name = "viewport" content = "width = device-width, intial-scale = 1.0">
         <link rel="stylesheet" href="../styles.css"/>
     </head>
@@ -26,6 +27,11 @@
                 </div>
             </div>
         </header>
-        <p id = "level">Score: 0</p>
+        <p id = "level">Score: 0 Highscore: 0</p>
+        <div id = "canvas"></div>
+        <div id ="retry">
+            <p>Click if you want to play again!</p>
+            <button onclick = "retry()"></button>
+        </div>
     </body>
 </html>

@@ -12,8 +12,11 @@ var seg2 = 5;
 
 var bLoss, rLoss;
 
+var bScore = 0, rScore = 0;
+
 function setup() {
-    createCanvas(600,600);
+    var canvas = createCanvas(600,600);
+    canvas.parent("canvas");
     stroke(10);
     frameRate(15);
     ellipseMode(CORNER);//Necessary to make the fruit work
@@ -23,6 +26,7 @@ function setup() {
         xPos2.push(550);
         yPos2.push(300);
     }
+    document.getElementById("retry").style.visibility = "hidden";
 }
 
 function updateBlue() {
@@ -140,11 +144,16 @@ function draw() {
     if(bLoss == 1 && rLoss == 1) {
         status.innerHTML = "It's A Tie!";
         noLoop();
+        document.getElementById("retry").style.visibility = "visible";
     } else if(bLoss == 1) {
+        rScore++;
         status.innerHTML = "Red Wins!";
         noLoop();
+        document.getElementById("retry").style.visibility = "visible";
     } else if(rLoss == 1) {
+        bScore++;
         status.innerHTML = "Blue Wins!";
         noLoop();
+        document.getElementById("retry").style.visibility = "visible";
     }
 }

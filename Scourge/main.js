@@ -2,9 +2,12 @@ var xPos = Math.floor(Math.random() * 380 + 10), yPos = Math.floor(Math.random()
 var ePos = [Math.floor(Math.random() * 380), Math.floor(Math.random() * 351) + 50];
 var eBeh = [Math.floor(Math.random() * 2)];
 var score = 0;
+var highscore = 0;
 
 function setup() {
-    createCanvas(400,400);
+    var canvas = createCanvas(400,400);
+    canvas.parent("canvas");
+    document.getElementById("retry").style.visibility = "hidden";
 }
 
 function guard(i) {
@@ -87,8 +90,9 @@ function enemy(i) {
 
 function lose() {
     var levelText = document.getElementById("level");
-    levelText.innerHTML = "You lost with a score of " + score + "!";
+    levelText.innerHTML = "You lost with a score of " + score + "! Highscore: " + highscore;
     noLoop();
+    document.getElementById("retry").style.visibility = "visible";
 }
 
 function check() {
@@ -98,7 +102,10 @@ function check() {
     if(c < 17.5) {
         var levelText = document.getElementById("level");
         score++;
-        levelText.innerHTML = "Score: " + score;
+        if(score > highscore) {
+            highscore = score;
+        }
+        levelText.innerHTML = "Score: " + score + " Highscore: " + highscore;
         xPos = Math.floor(Math.random() * 400);
         yPos = Math.floor(Math.random() * 40);
         xGoal = Math.floor(Math.random() * 385 + 7.5);
