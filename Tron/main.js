@@ -1,27 +1,24 @@
 var xS = 1, yS = 0, xS2 = -1, yS2 = 0, oxS, oyS, oxS2, oyS2;
 
-var xPos = 40;
-var yPos = 300;
+var xPos;
+var yPos;
 
-var xPos2 = 550;
-var yPos2 = 300;
+var xPos2;
+var yPos2;
 
 var bLoss, rLoss;
 
 var bScore = 0, rScore = 0;
 
+var game = 0;
+
 function setup() {
     var canvas = createCanvas(600,600);
     canvas.parent("canvas");
-    document.getElementById("retry").style.visibility = "hidden";
     background(0);
-    
     frameRate(15);
     noStroke();
-    fill(0,0,255);
-    rect(xPos,yPos,10,10);
-    fill(255,0,0);
-    rect(xPos2,yPos2,10,10);
+    noLoop();
 }
 
 function checkBlue() {
@@ -29,7 +26,7 @@ function checkBlue() {
         bLoss = 1;
     }
     var check = get(xPos,yPos);
-    if(red(check) != 0 && green(check) != 0 && blue(check) != 0) {
+    if(red(check) != 0 && green(check) != 0 && blue(check) != 0 && game == 1) {
         bLoss = 1;
     }
 }
@@ -39,13 +36,14 @@ function checkRed() {
         rLoss = 1;
     }
     var check = get(xPos2,yPos2);
-    if(red(check) != 0 && green(check) != 0 && blue(check) != 0) {
+    if(red(check) != 0 && green(check) != 0 && blue(check) != 0 && game == 1) {
         rLoss = 1;
     }
 }
 
 function draw() {
     var status = document.getElementById("status");
+    var text = document.getElementById("text");
     //Fills the trail
     fill(111,195,223);
     rect(xPos,yPos,10,10);
@@ -72,16 +70,19 @@ function draw() {
     if(rLoss == 1 && bLoss == 1) {
         status.innerHTML = "It's A Tie!";
         noLoop();
-        document.getElementById("retry").style.visibility = "visible";
+        text.innerHTML = "Press Space If You Want To Play Again!";
+        game = 0;
     } else if(rLoss == 1) {
         bScore++;
         status.innerHTML = "Blue Wins!";
         noLoop();
-        document.getElementById("retry").style.visibility = "visible";
+        text.innerHTML = "Press Space If You Want To Play Again!";
+        game = 0;
     } else if(bLoss == 1) {
         rScore++;
         status.innerHTML = "Red Wins!";
         noLoop();
-        document.getElementById("retry").style.visibility = "visible";
+        text.innerHTML = "Press Space If You Want To Play Again!";
+        game = 0;
     }
 }

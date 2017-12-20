@@ -6,6 +6,18 @@ body {
     text-align: center;
 }
 
+#scourge {
+    min-height: 635px;
+}
+
+#tron {
+    min-height: 815px;
+}
+
+#twoplayersnake {
+    min-height: 835px;
+}
+
 .container {
     width:80%;
     margin: auto;
@@ -47,9 +59,4 @@ a:hover {
 
 #current {
     color:#e8491d;
-}
-
-button {
-    height:30px;
-    width:30px;
 }

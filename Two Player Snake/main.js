@@ -1,6 +1,6 @@
 var xS = 1, yS = 0, xS2 = -1, yS2 = 0, oxS, oyS, oxS2, oyS2;
-var xF = Math.floor(Math.random() * 30) * 20;
-var yF = Math.floor(Math.random() * 30) * 20;
+var xF;
+var yF;
 
 var xPos = [];
 var yPos = [];
@@ -12,6 +12,8 @@ var seg2 = 5;
 
 var bLoss, rLoss;
 
+var game = 0;
+
 var bScore = 0, rScore = 0;
 
 function setup() {
@@ -19,14 +21,8 @@ function setup() {
     canvas.parent("canvas");
     stroke(10);
     frameRate(15);
+    noLoop();
     ellipseMode(CORNER);//Necessary to make the fruit work
-    for(var i = 0;i<seg;i++) { //Makes an arry of 5 with the starting coordinates for Blue and Red
-        xPos.push(40);
-        yPos.push(300);
-        xPos2.push(550);
-        yPos2.push(300);
-    }
-    document.getElementById("retry").style.visibility = "hidden";
 }
 
 function updateBlue() {
@@ -134,6 +130,7 @@ function checkRed() {
 }
 
 function draw() {
+    var text = document.getElementById("text");
     var status = document.getElementById("status");
     background(0);
     updateBlue();
@@ -142,18 +139,22 @@ function draw() {
     checkBlue();
     checkRed();
     if(bLoss == 1 && rLoss == 1) {
+        text.innerHTML = "Press Space If You Want To Play Again!";
+        fill(256);
         status.innerHTML = "It's A Tie!";
         noLoop();
-        document.getElementById("retry").style.visibility = "visible";
+        game = 0;
     } else if(bLoss == 1) {
+        text.innerHTML = "Press Space If You Want To Play Again!";
         rScore++;
         status.innerHTML = "Red Wins!";
         noLoop();
-        document.getElementById("retry").style.visibility = "visible";
+        game = 0;
     } else if(rLoss == 1) {
+        text.innerHTML = "Press Space If You Want To Play Again!";
         bScore++;
         status.innerHTML = "Blue Wins!";
         noLoop();
-        document.getElementById("retry").style.visibility = "visible";
+        game = 0;
     }
 }

@@ -7,10 +7,11 @@
         <script src="main.js"></script>
         <script src="movement.js"></script>
         <script src="retry.js"></script>
+        <script src="prevent.js"></script>
         <meta name = "viewport" content = "width = device-width, intial-scale = 1.0">
         <link rel="stylesheet" href="../styles.css"/>
     </head>
-    <body id = "body">
+    <body id = "scourge" onkeypress = "retry()" onkeydown = "prevent()">
         <header>
             <div class = "container">
                 <div id = "banner">
@@ -27,11 +28,8 @@
                 </div>
             </div>
         </header>
-        <p id = "level">Score: 0 Highscore: 0</p>
+        <p id = "status" style = "font-size:20px">Score: 0 Highscore: 0</p>
         <div id = "canvas"></div>
-        <div id ="retry">
-            <p>Click if you want to play again!</p>
-            <button onclick = "retry()"></button>
-        </div>
+        <div id = "text" style = "font-size: 24px; padding: 20px 0px 20px 0px">Press Space To Start</div>
     </body>
 </html>

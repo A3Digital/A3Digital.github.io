@@ -1,13 +1,14 @@
-var xPos = Math.floor(Math.random() * 380 + 10), yPos = Math.floor(Math.random() * 40 + 10), xGoal = Math.floor(Math.random() * 385 + 7.5), yGoal = Math.floor(Math.random() * 100) + 292.5;
-var ePos = [Math.floor(Math.random() * 380), Math.floor(Math.random() * 351) + 50];
-var eBeh = [Math.floor(Math.random() * 2)];
+var xPos, yPos, xGoal , yGoal;
+var ePos = [];
+var eBeh = [];
 var score = 0;
 var highscore = 0;
+var game = 0;
 
 function setup() {
     var canvas = createCanvas(400,400);
     canvas.parent("canvas");
-    document.getElementById("retry").style.visibility = "hidden";
+    noLoop();
 }
 
 function guard(i) {
@@ -89,10 +90,10 @@ function enemy(i) {
 }
 
 function lose() {
-    var levelText = document.getElementById("level");
-    levelText.innerHTML = "You lost with a score of " + score + "! Highscore: " + highscore;
+    document.getElementById("status").innerHTML = "You lost with a score of " + score + "! Highscore: " + highscore;
+    document.getElementById("text").innerHTML = "Press Space If You Want To Play Again!"
+    game = 0;
     noLoop();
-    document.getElementById("retry").style.visibility = "visible";
 }
 
 function check() {
@@ -100,7 +101,7 @@ function check() {
     var b = yPos - yGoal;
     var c = Math.sqrt(a*a + b*b);
     if(c < 17.5) {
-        var levelText = document.getElementById("level");
+        var levelText = document.getElementById("status");
         score++;
         if(score > highscore) {
             highscore = score;
@@ -122,6 +123,7 @@ function check() {
 
 function draw() {
     background(0);
+    fill(0,102,153);
     movement();
     fill(60,256,60);
     ellipse(xGoal, yGoal, 15,15);
