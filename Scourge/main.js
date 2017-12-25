@@ -1,4 +1,4 @@
-var xPos, yPos, xGoal , yGoal;
+var xPos, yPos, xGoal, yGoal;
 var ePos = [];
 var eBeh = [];
 var score = 0;

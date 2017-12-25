@@ -1,6 +1,6 @@
 function retry() {
     if(event.keyCode == 32 && game == 0) {
-        loop();
+        event.preventDefault();
         xPos = Math.floor(Math.random() * 380 + 10);
         yPos = Math.floor(Math.random() * 40 + 10);
         xGoal = Math.floor(Math.random() * 385 + 7.5);
@@ -20,5 +20,4 @@ function retry() {
         game = 1;
         loop();
     }
-    return 0;
 }
