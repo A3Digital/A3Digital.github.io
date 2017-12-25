@@ -14,6 +14,9 @@ function retry() {
             boostfoodchance = 50;
             boostfood.update();
             poison.update();
+            if(poison.yF == 300) {
+                posion.yF++;
+            }
         }
         
         
