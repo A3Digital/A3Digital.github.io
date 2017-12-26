@@ -9,6 +9,11 @@ var boostfoodchance = 50;
 var game = 0;
 var extras = 0;
 
+function gameOver() {
+    bSnake.death(rSnake);
+    rSnake.death(bSnake);
+}
+
 function setup() {
     var canvas = createCanvas(600,600);
     canvas.parent("canvas");
@@ -21,41 +26,44 @@ function setup() {
 function draw() {
     background(0);
     
-    /*
-        Snakes
-                */
-    
     stroke(10);
+    /*=============================*/
     
-    fill(0,0,255);
     bSnake.update();
     
-    
-    fill(255,0,0);
     rSnake.update();
     
-    /*
-        Items
-                */
+    gameOver();
+    
+    /*============================*/
+    
+    fill(0,0,255);
+    bSnake.boost();
+    bSnake.display();
+    
+    fill(255,0,0);
+    rSnake.boost();
+    rSnake.display();
+    
+    gameOver();
+    
+    /*===========================*/
     
     noStroke();
     
     fill(0,255,0);
     food.display();
     
-    /*
-        Extra Items
-                      */
     if(document.getElementById("box").checked) {
         if(megafoodchance != 0) {
-            megafoodchance = Math.floor(Math.random() * 1000);
+            megafoodchance = Math.floor(Math.random() * 600);
         } else {
             fill(255,255,0);
             megafood.display();
         }
         
         if(boostfoodchance != 0) {
-            boostfoodchance = Math.floor(Math.random() * 250);
+            boostfoodchance = Math.floor(Math.random() * 100);
         } else {
             fill(255,255,255);
             boostfood.display();
@@ -64,26 +72,22 @@ function draw() {
         fill(200,0,255);
         poison.display();
     }
+
     
-    
-    /*
-        Checks Losses
-                        */
-                        
-    if(bSnake.death(rSnake) && rSnake.death(bSnake) && game == 1) {
+    if(bSnake.loss && rSnake.loss && game) {
         document.getElementById("text").innerHTML = "Press Space If You Want To Play Again!";
         document.getElementById("status").innerHTML = "Tie";
         document.getElementById("extras").style.visibility = "visible";
         game = 0;
         noLoop();
-    } else if(bSnake.death(rSnake) && game == 1) {
+    } else if(bSnake.loss && game) {
         document.getElementById("text").innerHTML = "Press Space If You Want To Play Again!";
         document.getElementById("status").innerHTML = "Red Wins";
         document.getElementById("extras").style.visibility = "visible";
         rSnake.score++;
         game = 0;
         noLoop();
-    } else if(rSnake.death(bSnake) && game == 1) {
+    } else if(rSnake.loss && game) {
         document.getElementById("text").innerHTML = "Press Space If You Want To Play Again!";
         document.getElementById("status").innerHTML = "Blue Wins";
         document.getElementById("extras").style.visibility = "visible";

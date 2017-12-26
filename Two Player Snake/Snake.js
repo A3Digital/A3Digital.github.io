@@ -1,6 +1,8 @@
 class Snake {
     
     constructor() {
+        this.boosttemp = 0;
+        this.loss = 0;
         this.score = 0;
         this.xPos = [];
         this.yPos = [];
@@ -8,6 +10,7 @@ class Snake {
     
     load(xPos, yPos, spd) {
         this.boosttemp = 0;
+        this.loss = 0;
         this.spd = spd;
         this.ospd = spd;
         for(var i = 0; i < this.xPos.length; i) {
@@ -58,26 +61,29 @@ class Snake {
         }
     }
     
-    update() {
-        // Update Tail
-        
-        this.movement();
+    boost() {
         if(this.boosttemp > 0) {
             this.movement();
             this.boosttemp--;
         }
+    }
+    
+    update() {
+        // Update Tail
+        
+        this.movement();
         
         if(this.xPos[0] == food.xF && this.yPos[0] == food.yF) {
             food.update();
             this.grow(5);
         }
-        if(this.xPos[0] == megafood.xF && this.yPos[0] == megafood.yF) {
+        if(this.xPos[0] == megafood.xF && this.yPos[0] == megafood.yF && megafoodchance == 0) {
             megafoodchance = 50;
             megafood.update();
             this.grow(15);
         }
         
-        if(this.xPos[0] == boostfood.xF && this.yPos[0] == boostfood.yF) {
+        if(this.xPos[0] == boostfood.xF && this.yPos[0] == boostfood.yF && boostfoodchance == 0) {
             boostfoodchance = 50;
             boostfood.update();
             this.boosttemp = 75;
@@ -87,28 +93,30 @@ class Snake {
             poison.update();
             this.shrink();
         }
-        for(var i = 0; i < this.xPos.length; i++) {
-            rect(this.xPos[i],this.yPos[i],10,10);
-        }
     }
     
     death(other) {
         if(this.xPos.length == 0) {
-            return 1;
+            this.loss = 1;
         }
         if(this.xPos[0] < 0 || this.xPos[0] > 590 || this.yPos[0] < 0 || this.yPos[0] > 590) {
-            return 1;
+            this.loss = 1;
         }
         for(var i = 1;i < this.xPos.length; i++) {
             if(this.xPos[0] == this.xPos[i] && this.yPos[0] == this.yPos[i]) {
-                return 1;
+                this.loss = 1;
             }
         }
         for(var i = 0;i < other.xPos.length; i++) {
             if(this.xPos[0] == other.xPos[i] && this.yPos[0] == other.yPos[i]) {
-                return 1;
+                this.loss = 1;
             }
         }
-        return 0;
+    }
+    
+    display() {
+        for(var i = 0; i < this.xPos.length; i++) {
+            rect(this.xPos[i],this.yPos[i],10,10);
+        }
     }
 };
