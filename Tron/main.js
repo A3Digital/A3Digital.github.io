@@ -19,11 +19,11 @@ function draw() {
     var text = document.getElementById("text");
     
     // Displays Trail
-    var c = color(111,195,223);
-    bluePlayer.display(c);
+    fill(111,195,223);
+    bluePlayer.display();
     
-    c = color(222,116,12);
-    redPlayer.display(c);
+    fill(222,116,12);
+    redPlayer.display();
     
     // Updates Light Cycles
     bluePlayer.update();
@@ -34,11 +34,11 @@ function draw() {
     var rLoss = redPlayer.check();
     
     // Displays Light Cycle
-    c = color(111,135,255);
-    bluePlayer.display(c);
+    fill(111,135,255);
+    bluePlayer.display();
     
-    c = color(255,56,12);
-    redPlayer.display(c);
+    fill(255,56,12);
+    redPlayer.display();
     
     // Outcomes
     if(rLoss == true && bLoss == true) {

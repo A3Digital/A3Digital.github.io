@@ -52,8 +52,7 @@ class LightCycle {
         this.OyS = this.yS;
     }
     
-    display(c) {
-        fill(c);
+    display() {
         rect(this.xPos, this.yPos, 10, 10);
     }
     
