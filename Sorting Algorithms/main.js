@@ -1,5 +1,5 @@
 var a = [];
-var numRect = 128;
+var numRect = 40;
 var rectWidth = 640 / numRect;
 var rectHeight = 360 / numRect;
 var sorted = false;

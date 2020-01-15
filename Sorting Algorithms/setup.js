@@ -29,6 +29,19 @@ function displayArray() {
     }
 }
 
+function displayHighlights(i, j, k) {
+    
+    fill("#ff0000");
+    rect(i*rectWidth, 0, rectWidth, rectHeight*(a[i]+1));
+    rect(j*rectWidth, 0, rectWidth, rectHeight*(a[j]+1));
+    
+    if(k >= 0 && k < a.length) {
+        fill("#00ff00");
+        rect(k*rectWidth, 0, rectWidth, rectHeight*(a[k]+1));
+    }
+    
+}
+
 function shuffleButton() {
     if(!sorting) {
         shuffleArray();
@@ -49,6 +62,10 @@ async function sortButton() {
             await inPlaceMergeSort(0, a.length-1);    
         } else if(setting == "Selection Sort") {
             await selectionSort();
+        } else if(setting == "Insertion Sort") {
+            await insertionSort();
+        } else if(setting == "Bubble Sort") {
+            await bubbleSort();
         }
         displayArray();
         document.getElementById("status").innerHTML = "Sorted Using " + setting + "!";
