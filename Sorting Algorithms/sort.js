@@ -93,3 +93,22 @@ async function bubbleSort() {
         }
     }
 }
+
+function isSorted() {
+    for(var i = 0; i < a.length - 1; i++) {
+        if(a[i+1] < a[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+async function bogoSort() {
+    while(!isSorted()) {
+        
+        shuffleArray();
+        displayArray();
+        await sleep(10);   
+    
+    }
+}

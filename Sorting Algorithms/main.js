@@ -1,7 +1,6 @@
 var a = [];
-var numRect = 40;
-var rectWidth = 640 / numRect;
-var rectHeight = 360 / numRect;
+var numRect = 80;
+var rectWidth, rectHeight;
 var sorted = false;
 var sorting = false;
 

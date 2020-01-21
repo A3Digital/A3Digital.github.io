@@ -3,9 +3,9 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
-
 function makeArray() {
+    rectWidth = 640 / numRect;
+    rectHeight = 360 / numRect;
     a = [];
     for(var i = 0; i < numRect; i++) {
         a.push(i);
@@ -57,6 +57,7 @@ async function sortButton() {
 
     if(!sorted && !sorting){
         document.getElementById("status").innerHTML = "Sorting...";
+        document.getElementById("mySlider").disabled = true;
         sorting = true;
         if(setting == "In Place Merge Sort") {
             await inPlaceMergeSort(0, a.length-1);    
@@ -66,9 +67,12 @@ async function sortButton() {
             await insertionSort();
         } else if(setting == "Bubble Sort") {
             await bubbleSort();
+        } else if(setting == "Bogo Sort") {
+            await bogoSort();
         }
         displayArray();
         document.getElementById("status").innerHTML = "Sorted Using " + setting + "!";
+        document.getElementById("mySlider").disabled = false;
         sorting = false;
         sorted = true;
     } else if(sorted) {

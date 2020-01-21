@@ -35,7 +35,27 @@
             <option value="Selection Sort">Selection Sort</option>
             <option value="Insertion Sort">Insertion Sort</option>
             <option value="Bubble Sort">Bubble Sort</option>
+            <option value="Bogo Sort">Bogo Sort</option>
         </select>
         <button type = "button" onclick="sortButton()">Sort</button>
+        <div>
+            <input type="range" min="4" max ="160" value="80" class="slider" id="mySlider">
+            <div id = "myOutput">80</div>
+        </div>
+        
+        <script>
+            var slider = document.getElementById("mySlider");
+            var output = document.getElementById("myOutput");
+            slider.oninput = function() {
+                output.innerHTML = this.value;
+                numRect = this.value;
+                sorted = false;
+                document.getElementById("status").innerHTML = "Choose A Sorting Algorithm And Click \"Sort\".";
+                makeArray();
+                shuffleArray();
+                displayArray();
+            }
+        </script>
+        
     </body>
 </html>
