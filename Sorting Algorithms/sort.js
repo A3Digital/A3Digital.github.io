@@ -1,3 +1,91 @@
+/*
+        Heap Sort
+*/
+async function swap(i, j) {
+    var temp = a[i];
+    a[i] = a[j];
+    a[j] = temp;
+}
+
+async function heapify(n, i) {
+    var largest = i;
+    var l = (i*2) + 1;
+    var r = (i*2) + 2;
+    
+    if(l < n && a[l] > a[largest])
+        largest = l;
+    
+    if(r < n && a[r] > a[largest])
+        largest = r;
+    
+    if(largest != i) {
+        await swap(i, largest);
+        await heapify(n, largest);
+    }
+}
+
+async function heapSort() {
+    // Creates Binary Heap
+    for(var i = Math.floor(numRect/2) - 1; i >= 0; --i) {
+        await heapify(numRect, i);
+        displayArray();
+        await sleep(25);
+    }
+    
+    // Sorts
+    for(var r = numRect-1; r >= 0; r--) {
+        await swap(0, r);
+        await heapify(r, 0);
+        displayArray();
+        await sleep(25);
+    }
+}
+
+/*
+async function swap(i, j) {
+    var temp = a[i];
+    a[i] = a[j];
+    a[j] = temp;
+}
+
+async function heapify(n, i) {
+    var largest = i;
+    var l = (i*2) + 1;
+    var r = (i*2) + 2;
+    
+    if(l < n && a[l] > a[largest])
+        largest = l;
+    
+    if(r < n && a[r] > a[largest])
+        largest = r;
+    
+    if(largest != i) {
+        await swap(i, largest);
+        await heapify(n, largest);
+    }
+}
+
+async function heapSort() {
+    // Creates Binary Heap
+    for(var i = Math.floor(numRect/2) - 1; i >= 0; --i) {
+        await heapify(numRect, i);
+        displayArray();
+        await sleep(25);
+    }
+    
+    // Sorts
+    for(var r = numRect-1; r >= 0; r--) {
+        await swap(0, r);
+        await heapify(r, 0);
+        displayArray();
+        await sleep(25);
+    }
+}
+*/
+
+/*
+        In Place Merge Sort
+*/
 async function inPlaceMerge(p, m, q) {
     var p2 = m + 1;
     while(p <= m && p2 <= q) {
@@ -32,6 +120,9 @@ async function inPlaceMergeSort(p, q) {
     }
 }
 
+/*
+        Selection Sort
+*/
 async function selectionSort() {
     for(var i = 0; i < a.length - 1; i++) {
         var minIndex = i;
@@ -53,6 +144,9 @@ async function selectionSort() {
     }
 }
 
+/*
+        Insertion Sort
+*/
 async function insertionSort() {
     for(var i = 1; i < a.length; i++) {
         var j = i;
@@ -77,6 +171,9 @@ async function insertionSort() {
     }
 }
 
+/*
+        Bubble Sort
+*/
 async function bubbleSort() {
     for(var i = a.length - 1; i >= 0; i--) {
         for(var j = 0; j < i; j++) {
@@ -94,6 +191,9 @@ async function bubbleSort() {
     }
 }
 
+/*
+        Bogo Sort
+*/
 function isSorted() {
     for(var i = 0; i < a.length - 1; i++) {
         if(a[i+1] < a[i]) {
@@ -111,4 +211,23 @@ async function bogoSort() {
         await sleep(10);   
     
     }
+}
+
+async function stalinSort() {
+    var i = 1, n = numRect;
+    while(i < n) {
+        displayArray();
+        displayHighlights(i, i, i-1);
+        await sleep(25);
+        
+        if(a[i] < a[i-1]) {
+            a.splice(i, 1);
+            --n;
+        } else {
+            ++i;
+        }
+        
+    }
+    displayArray();
+    makeArray();
 }

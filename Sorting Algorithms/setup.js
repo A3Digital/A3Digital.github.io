@@ -61,6 +61,8 @@ async function sortButton() {
         sorting = true;
         if(setting == "In Place Merge Sort") {
             await inPlaceMergeSort(0, a.length-1);    
+        } else if(setting == "Heap Sort") {
+            await heapSort();
         } else if(setting == "Selection Sort") {
             await selectionSort();
         } else if(setting == "Insertion Sort") {
@@ -69,8 +71,12 @@ async function sortButton() {
             await bubbleSort();
         } else if(setting == "Bogo Sort") {
             await bogoSort();
+        } else if(setting == "Stalin Sort") {
+            await stalinSort();
         }
-        displayArray();
+        
+        
+        if(setting != "Stalin Sort") displayArray();
         document.getElementById("status").innerHTML = "Sorted Using " + setting + "!";
         document.getElementById("mySlider").disabled = false;
         sorting = false;
