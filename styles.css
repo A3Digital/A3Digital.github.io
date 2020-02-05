@@ -60,3 +60,9 @@ a:hover {
 #current {
     color:#e8491d;
 }
+
+.fix{
+    position: fixed;
+    bottom: 20px;
+    left: 49%;
+}
