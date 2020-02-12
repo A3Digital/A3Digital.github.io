@@ -28,5 +28,6 @@ function retry() {
         
         loop();
         
+        noCursor();
     }
 }

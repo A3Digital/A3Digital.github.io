@@ -94,6 +94,7 @@ function lose() {
     document.getElementById("text").innerHTML = "Press Space If You Want To Play Again!"
     game = 0;
     noLoop();
+    cursor();
 }
 
 function check() {

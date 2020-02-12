@@ -80,6 +80,7 @@ function draw() {
         document.getElementById("extras").style.visibility = "visible";
         game = 0;
         noLoop();
+        cursor();
     } else if(bSnake.loss && game) {
         document.getElementById("text").innerHTML = "Press Space If You Want To Play Again!";
         document.getElementById("status").innerHTML = "Red Wins";
@@ -87,6 +88,7 @@ function draw() {
         rSnake.score++;
         game = 0;
         noLoop();
+        cursor();
     } else if(rSnake.loss && game) {
         document.getElementById("text").innerHTML = "Press Space If You Want To Play Again!";
         document.getElementById("status").innerHTML = "Blue Wins";
@@ -94,5 +96,6 @@ function draw() {
         bSnake.score++;
         game = 0;
         noLoop();
+        cursor();
     }
 }

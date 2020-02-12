@@ -46,18 +46,21 @@ function draw() {
         noLoop();
         text.innerHTML = "Press Space If You Want To Play Again!";
         game = 0;
+        cursor();
     } else if(rLoss == true) {
         bScore++;
         status.innerHTML = "Blue Wins!";
         noLoop();
         text.innerHTML = "Press Space If You Want To Play Again!";
         game = 0;
+        cursor();
     } else if(bLoss == true) {
         rScore++;
         status.innerHTML = "Red Wins!";
         noLoop();
         text.innerHTML = "Press Space If You Want To Play Again!";
         game = 0;
+        cursor();
     }
     
 }

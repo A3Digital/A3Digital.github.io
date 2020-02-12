@@ -19,5 +19,6 @@ function retry() {
         score = 0;
         game = 1;
         loop();
+        noCursor();
     }
 }

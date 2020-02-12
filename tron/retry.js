@@ -12,5 +12,7 @@ function retry() {
         game = 1;
         
         loop();
+        
+        noCursor();
     }
 }
