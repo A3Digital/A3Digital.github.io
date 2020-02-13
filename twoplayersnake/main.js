@@ -8,6 +8,7 @@ var boostfood = new Item();
 var boostfoodchance = 50;
 var game = 0;
 var extras = 0;
+var boostMove = 0;
 
 function gameOver() {
     bSnake.death(rSnake);
@@ -18,7 +19,7 @@ function setup() {
     var canvas = createCanvas(600,600);
     canvas.parent("canvas");
     background(0);
-    frameRate(15);
+    frameRate(30);
     ellipseMode(CORNER); // Necessary to make the Items work
     noLoop();
 }
@@ -29,20 +30,29 @@ function draw() {
     stroke(10);
     /*=============================*/
     
-    bSnake.update();
+    if(boostMove) {
+        bSnake.boost();
+    } else {
+        bSnake.update();    
+    }
     
-    rSnake.update();
+    if(boostMove) {
+        rSnake.boost();
+    } else {
+        rSnake.update();
+    }
     
-    gameOver();
+    
+    boostMove = !boostMove;
+    
+    // gameOver();
     
     /*============================*/
     
     fill(0,0,255);
-    bSnake.boost();
     bSnake.display();
     
     fill(255,0,0);
-    rSnake.boost();
     rSnake.display();
     
     gameOver();

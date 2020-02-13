@@ -25,6 +25,7 @@ function retry() {
         document.getElementById("extras").style.visibility = "hidden";
         
         game = 1;
+        boostMove = 0;
         
         loop();
         
