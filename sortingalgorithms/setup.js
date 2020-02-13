@@ -58,6 +58,7 @@ async function sortButton() {
     if(!sorted && !sorting){
         document.getElementById("status").innerHTML = "Sorting...";
         document.getElementById("mySlider").disabled = true;
+        document.getElementById("myOutput").disabled = true;
         sorting = true;
         if(setting == "In Place Merge Sort") {
             await inPlaceMergeSort(0, a.length-1);    
@@ -79,6 +80,7 @@ async function sortButton() {
         if(setting != "Stalin Sort") displayArray();
         document.getElementById("status").innerHTML = "Sorted Using " + setting + "!";
         document.getElementById("mySlider").disabled = false;
+        document.getElementById("myOutput").disabled = false;
         sorting = false;
         sorted = true;
     } else if(sorted) {
