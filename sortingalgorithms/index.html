@@ -40,17 +40,32 @@
             <option value="Stalin Sort">Stalin Sort</option>
         </select>
         <button type = "button" onclick="sortButton()">Sort</button>
-        <!--<button type = "button" onclick="displayArray()">Display</button>-->
+        <input id = "stop" type = "image" src="../images/stop.png" onclick="stopButton()" style="position:absolute; margin-left: 10px; margin-top: 3px; display:none;">
         <div>
-            <input type="range" min="4" max ="160" value="80" class="slider" id="mySlider">
-            <div id = "myOutput">80</div>
+            <input type="range" min="4" max="160" value="80" class="slider" id="mySlider">
+            <div>
+            <input type="number" min="4" max="160" id="myOutput" value="80">
+            </div>
         </div>
         
         <script>
             var slider = document.getElementById("mySlider");
-            var output = document.getElementById("myOutput");
+            var inputBox = document.getElementById("myOutput");
+            // Any time the slider is moved
             slider.oninput = function() {
-                output.innerHTML = this.value;
+                inputBox.value = this.value;
+                numRect = this.value;
+                sorted = false;
+                document.getElementById("status").innerHTML = "Choose A Sorting Algorithm And Click \"Sort\".";
+                makeArray();
+                shuffleArray();
+                displayArray();
+            }
+            // Any time the input from the input box is entered
+            inputBox.onchange = function() {
+                if(this.value > 160) this.value = 160;
+                if(this.value < 4) this.value = 4;
+                slider.value = this.value;
                 numRect = this.value;
                 sorted = false;
                 document.getElementById("status").innerHTML = "Choose A Sorting Algorithm And Click \"Sort\".";
