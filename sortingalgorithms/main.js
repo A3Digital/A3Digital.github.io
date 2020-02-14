@@ -3,6 +3,7 @@ var numRect = 80;
 var rectWidth, rectHeight;
 var sorted = false;
 var sorting = false;
+var stop = 0;
 
 function setup() {    
     // Sets up canvas

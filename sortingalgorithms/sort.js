@@ -42,53 +42,12 @@ async function heapSort() {
 }
 
 /*
-async function swap(i, j) {
-    var temp = a[i];
-    a[i] = a[j];
-    a[j] = temp;
-}
-
-async function heapify(n, i) {
-    var largest = i;
-    var l = (i*2) + 1;
-    var r = (i*2) + 2;
-    
-    if(l < n && a[l] > a[largest])
-        largest = l;
-    
-    if(r < n && a[r] > a[largest])
-        largest = r;
-    
-    if(largest != i) {
-        await swap(i, largest);
-        await heapify(n, largest);
-    }
-}
-
-async function heapSort() {
-    // Creates Binary Heap
-    for(var i = Math.floor(numRect/2) - 1; i >= 0; --i) {
-        await heapify(numRect, i);
-        displayArray();
-        await sleep(25);
-    }
-    
-    // Sorts
-    for(var r = numRect-1; r >= 0; r--) {
-        await swap(0, r);
-        await heapify(r, 0);
-        displayArray();
-        await sleep(25);
-    }
-}
-*/
-
-/*
         In Place Merge Sort
 */
 async function inPlaceMerge(p, m, q) {
     var p2 = m + 1;
     while(p <= m && p2 <= q) {
+        if(stop) return;
         
         displayArray();
         displayHighlights(p, p2, q);
@@ -113,6 +72,7 @@ async function inPlaceMerge(p, m, q) {
 
 async function inPlaceMergeSort(p, q) {
     if(p < q) {
+        if(stop) return;
         var m = Math.floor( (p+q) / 2);
         await inPlaceMergeSort(p, m);
         await inPlaceMergeSort(m+1, q);
