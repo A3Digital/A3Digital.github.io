@@ -4,6 +4,7 @@ var bigBoxes = [];
 var game = 0;
 var xWins = 0;
 var oWins = 0;
+var count = 0;
 
 var place = function() {
     let attribute = this.id;
@@ -70,6 +71,17 @@ var place = function() {
     
     player = !player;
     
+    var possible = 0;
+    for(var i = 0; i < 9; i++) {
+        if(bigBoxes[i].value >= 0) possible++;
+    }
+    
+    if(++count == 81 || possible == 9) {
+        count = 81;
+        endGame();
+        return;
+    }
+    
     if(player) {
         document.getElementById("text").innerHTML = "X's Turn."
     } else {
@@ -78,14 +90,13 @@ var place = function() {
 };
 
 function checkSmallBoxes(original) {
-    var checking = smallBoxes[original].value;
     var corner = Math.floor(original/9) * 9;
     
     // Horizontal
     for(var i = 0; i < 3; i++) {    
         var possible = 0;
         for(var j = 0; j < 3; j++) {
-            if(smallBoxes[corner + i*3 + j].value == checking) possible++;
+            if(smallBoxes[corner + i*3 + j].value == player) possible++;
         }
         if(possible == 3) return 1;
     }
@@ -94,34 +105,42 @@ function checkSmallBoxes(original) {
     for(var i = 0; i < 3; i++) {    
         var possible = 0;
         for(var j = 0; j < 3; j++) {
-            if(smallBoxes[corner + j*3 + i].value == checking) possible++;
+            if(smallBoxes[corner + j*3 + i].value == player) possible++;
         }
         if(possible == 3) return 1;
     }
     // Diagonal
     var possible = 0;
     for(var i = 0; i < 3; i++) {
-        if(smallBoxes[corner + i*3 + i].value == checking) possible++;
+        if(smallBoxes[corner + i*3 + i].value == player) possible++;
     }
     if(possible == 3) return 1;
     
     possible = 0;
     for(var i = 0; i < 3; i++) {
-        if(smallBoxes[corner + 2 + i*3 - i].value == checking) possible++;
+        if(smallBoxes[corner + 2 + i*3 - i].value == player) possible++;
     }
     if(possible == 3) return 1;
+    
+    possible = 0;
+    for(var i = 0; i < 9; i++) {
+        if(smallBoxes[corner + i].value >= 0) possible++;
+    }
+    
+    if(possible == 9) {
+        bigBoxes[corner / 9].value = 3;
+        bigBoxes[corner / 9].style.background = "#cccccc";
+    }
     
     return 0;
 }
 
 function checkBigBoxes(original) {
-    var checking = bigBoxes[original].value;
-    
     // Horizontal
     for(var i = 0; i < 3; i++) {    
         var possible = 0;
         for(var j = 0; j < 3; j++) {
-            if(bigBoxes[i*3 + j].value == checking) possible++;
+            if(bigBoxes[i*3 + j].value == player) possible++;
         }
         if(possible == 3) return 1;
     }
@@ -130,20 +149,20 @@ function checkBigBoxes(original) {
     for(var i = 0; i < 3; i++) {    
         var possible = 0;
         for(var j = 0; j < 3; j++) {
-            if(bigBoxes[j*3 + i].value == checking) possible++;
+            if(bigBoxes[j*3 + i].value == player) possible++;
         }
         if(possible == 3) return 1;
     }
     // Diagonal
     var possible = 0;
     for(var i = 0; i < 3; i++) {
-        if(bigBoxes[i*3 + i].value == checking) possible++;
+        if(bigBoxes[i*3 + i].value == player) possible++;
     }
     if(possible == 3) return 1;
     
     possible = 0;
     for(var i = 0; i < 3; i++) {
-        if(bigBoxes[2 + i*3 - i].value == checking) possible++;
+        if(bigBoxes[2 + i*3 - i].value == player) possible++;
     }
     if(possible == 3) return 1;
     
@@ -194,7 +213,9 @@ function endGame() {
         smallBoxes[i].removeEventListener('click', place, false);
     }
     
-    if(player) {
+    if(count == 81) {
+        document.getElementById("status").innerHTML = "It's A Tie!";
+    } else if(player) {
         document.getElementById("status").innerHTML = "X Has Won!";
         xWins++;
     } else {
