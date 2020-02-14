@@ -13,12 +13,7 @@ function makeArray() {
 }
 
 function shuffleArray() {
-    for(var i = 0; i < a.length; i++) {
-        var j = Math.floor(Math.random() * (a.length))
-        var temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
-    }
+    shuffle(a, true);
 }
 
 function displayArray() {
@@ -52,12 +47,16 @@ function shuffleButton() {
 }
 
 async function sortButton() {
-    var sort = document.getElementById("sort");
-    var setting = (sort.options[sort.selectedIndex]).value;
-
+    // If not sorted and not sorting
     if(!sorted && !sorting){
+        var sort = document.getElementById("sort");
+        var setting = (sort.options[sort.selectedIndex]).value;
+        var stopButton = document.getElementById("stop");
+        // stopButton.style.display = "inline";
+        stop = 0;
         document.getElementById("status").innerHTML = "Sorting...";
         document.getElementById("mySlider").disabled = true;
+        document.getElementById("myOutput").disabled = true;
         sorting = true;
         if(setting == "In Place Merge Sort") {
             await inPlaceMergeSort(0, a.length-1);    
@@ -77,11 +76,23 @@ async function sortButton() {
         
         
         if(setting != "Stalin Sort") displayArray();
-        document.getElementById("status").innerHTML = "Sorted Using " + setting + "!";
+        if(stop) {
+            document.getElementById("status").innerHTML = "Sort Has Been Cancled.";
+        } else {
+            document.getElementById("status").innerHTML = "Sorted Using " + setting + "!";
+            sorted = true;
+        }
         document.getElementById("mySlider").disabled = false;
+        document.getElementById("myOutput").disabled = false;
+        stopButton.style.display = "none";
         sorting = false;
-        sorted = true;
-    } else if(sorted) {
+    } 
+    // Already sorted
+    else if(sorted) {
         document.getElementById("status").innerHTML = "This Is Already Sorted, Shuffle It First!";
     }
+}
+
+function stopButton() {
+    stop = 1;
 }
