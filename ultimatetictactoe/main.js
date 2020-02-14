@@ -195,10 +195,10 @@ function endGame() {
     }
     
     if(player) {
-        document.getElementById("status").innerHTML = "X's Has Won!";
+        document.getElementById("status").innerHTML = "X Has Won!";
         xWins++;
     } else {
-        document.getElementById("status").innerHTML = "O's Has Won!";
+        document.getElementById("status").innerHTML = "O Has Won!";
         oWins++;
     }
     document.getElementById("text").innerHTML = "Press Space If You Want To Play Again!";
