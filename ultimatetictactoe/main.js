@@ -182,6 +182,7 @@ function otherFunction() {
 function setup() {
     if(game) return;
     game = 1;
+    count = 0;
     
     for(var i = 0; i < 9; i++) {
         bigBoxes[i].value = -1; // -2 if locked; -1 is unlocked; 0 if o; 1 if x
